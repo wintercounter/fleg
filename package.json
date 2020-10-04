@@ -1,0 +1,75 @@
+{
+    "name": "fleg",
+    "version": "0.0.1",
+    "description": "🎌 A simple but powerful feature flag handling solution in less than 1Kb (min+gz). Browser + NodeJS.",
+    "main": "dist/cjs/index.js",
+    "module": "dist/index.js",
+    "scripts": {
+        "start": "mhy sb-start",
+        "test": "mhy jest && mhy tsc",
+        "build": "npm run build:es6 && npm run build:cjs",
+        "build:es6": "mhy bb --mhy-env=prod",
+        "build:cjs": "mhy bb --mhy-env=prod:cjs",
+        "config": "mhy config typescript eslint prettier -io",
+        "release": "npm run test && npm run build && git add -A && mhy sv"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/wintercounter/fleg.git"
+    },
+    "author": "wintercounter",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/wintercounter/fleg/issues"
+    },
+    "homepage": "https://github.com/wintercounter/fleg#readme",
+    "mhy": {
+        "storybook": {
+            "root": {
+                "build": {
+                    "output-dir": "docs"
+                }
+            }
+        },
+        "mhy": {
+            "cjs": {
+                "distFolder": "dist/cjs"
+            }
+        },
+        "babel": {
+            "cjs": {
+                "presets": [
+                    {
+                        "$match": {
+                            "query": "$[?(@[0].includes('preset-env'))]",
+                            "value": [
+                                {
+                                    "$match": {
+                                        "index": 1,
+                                        "value": {
+                                            "modules": "commonjs",
+                                            "targets": {
+                                                "$replace": {
+                                                    "node": true,
+                                                    "browsers": false,
+                                                    "esmodules": true
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "plugins": [
+                    {
+                        "$prepend": {
+                            "$expression": "$params.require.resolve('babel-plugin-add-module-exports')"
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}
