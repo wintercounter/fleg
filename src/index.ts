@@ -1,5 +1,5 @@
-const d = document
-const w = window
+const d = typeof document === 'undefined' ? undefined : document
+const w = typeof window === 'undefined' ? undefined : window
 const isNumber = /^\d+$/
 const parseNumber = input => (isNumber.test(input) ? parseInt(input, 10) : input)
 const parse = input => (input === 'false' ? false : input === 'true' ? true : parseNumber(input))
