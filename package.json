@@ -1,6 +1,6 @@
 {
     "name": "fleg",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "🎌 A simple but powerful feature flag handling solution in less than 1Kb (min+gz). Browser + NodeJS.",
     "main": "dist/cjs/index.js",
     "module": "dist/index.js",
