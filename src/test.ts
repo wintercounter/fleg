@@ -15,7 +15,8 @@ describe('Fleg', () => {
     beforeEach(() => {
         // List all flags used in the test so reset will remove all cookies
         new Fleg({
-            enableFoo: 1
+            enableFoo: 1,
+            enableBar: 1
         }).reset()
         setLocation('https://testdomain.com/')
     })
